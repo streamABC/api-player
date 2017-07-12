@@ -2,7 +2,7 @@
 
 Ver. 1.0.0 12-07-2017
 
-streamABC offers two open JavaScript player SDKs to interact with our player related API.
+streamABC offers two open Javascript player SDKs to interact with our player related APIs.
 
 * `sABC.Playerservices` - methods for metadata and other meta information for listeners, channels and stations
 * `sABC.Radio` - methods to implement a web player that can control skips for Radioplayer or stand-alone players
@@ -25,7 +25,7 @@ Add a reference to our library to your web application like so:
 <script src="//playerservices.streamabc.net/sabc.js"></script>
 ```
 
-> Please load this library with a direct link and don't safe it locally to your site. This prevents cross-domain issues. Also it makes sure you use the latest version.
+> Please load this library with a direct link and don't save local copy to your site. This prevents cross-domain issues makes sure you use the latest version.
 
 ### Usage
 
