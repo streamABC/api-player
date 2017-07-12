@@ -97,3 +97,21 @@ The payload `data` of both events contains all available metadata, for example:
     ]
 }
 ```
+
+## `sABC.Radio`
+
+This library provides methods to either control a Radioplayer console or a stand-alone player with a skipable radio stream in our streamABC infrastructure.
+
+### Installation
+
+Add a reference to our library to your web application like so:
+```html
+<script src="//playerservices.streamabc.net/radio.js"></script>
+```
+
+> Please load this library with a direct link and don't save local copy to your site. This prevents cross-domain issues makes sure you use the latest version.
+
+**Note:** You don't need to include `sabc.Playerservices` to receive meta data events because `sabc.Radio` uses it behind the scenes and emits the same meta data events as described above.
+
+### Usage
+
