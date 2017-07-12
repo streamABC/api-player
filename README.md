@@ -79,15 +79,15 @@ The payload `data` of both events contains all available metadata, for example:
         {
             "ASIN": "B001QC8V4I",
             "artist": "LCD Soundsystem",
-            "image": "https://images-eu.ssl-images-amazon.com/images/I/517o3A%2BQ%2BsL._SL160_.jpg"
+            "image": "https://images-eu.ssl-images-amazon.com/images/I/517o3A%2BQ%2BsL._SL160_.jpg",
             "largeimage": "https://images-eu.ssl-images-amazon.com/images/I/517o3A%2BQ%2BsL.jpg",
             "trackurl": "https://www.amazon.de/York-Love-Youre-Bringing-Down/dp/B001QC8V4I?SubscriptionId=AKIAIWBEZNVKMHRC5YOA&tag=momusicle-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=B001QC8V4I",
             "type": "amazon"
         },
         {
             "artist": "LCD Soundsystem",
-            "artisturl": "https://itunes.apple.com/de/artist/lcd-soundsystem/id29525428?uo=4"
-            "image": "http://is5.mzstatic.com/image/thumb/Music/v4/4f/e9/df/4fe9df4a-0ae2-0d17-58ce-edfd5f3385c2/source/100x100bb.jpg"
+            "artisturl": "https://itunes.apple.com/de/artist/lcd-soundsystem/id29525428?uo=4",
+            "image": "http://is5.mzstatic.com/image/thumb/Music/v4/4f/e9/df/4fe9df4a-0ae2-0d17-58ce-edfd5f3385c2/source/100x100bb.jpg",
             "largeimage": "https://images-eu.ssl-images-amazon.com/images/I/517o3A%2BQ%2BsL.jpg",
             "trackurl": "http://is5.mzstatic.com/image/thumb/Music/v4/4f/e9/df/4fe9df4a-0ae2-0d17-58ce-edfd5f3385c2/source/600x600bb.jpg",
             "previewurl": "http://audio.itunes.apple.com/apple-assets-us-std-000001/AudioPreview71/v4/72/63/ad/7263adf0-8314-fd7a-20ff-004e121c1fb8/mzaf_6600252372906776921.plus.aac.p.m4a",
