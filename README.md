@@ -102,6 +102,8 @@ The payload `data` of both events contains all available metadata, for example:
 
 This library provides methods to either control a Radioplayer console or a stand-alone player with a skipable radio stream in our streamABC infrastructure.
 
+A reference implementation for Radioplayer console can be found in this [repository](https://github.com/streamABC/skiponradio-radioplayer).
+
 ### Installation
 
 Add a reference to our library to your web application like so:
@@ -115,3 +117,77 @@ Add a reference to our library to your web application like so:
 
 ### Usage
 
+Disable the default Radioplayer init call:
+```javascript
+//radioplayer.init();
+```
+
+Create an instance of `sABC.Radio` with calling `sABC.newRadio(options?: sABC.RadioConfig)` somewhere in your code:
+```javascript
+var sabcRadio = sABC.newRadio({
+    debug: false,
+    apikey: "abc",
+    radioplayer: true
+});
+```            
+
+Set a channel with `sabcRadio.setChannel(channel: sABC.Channel, defaultQuality: string)`:
+```javascript
+sabcRadio.setChannel({
+    "skip": true,
+    "streamurl": {
+        "lq": "http://sabc-test.stream.vip/1/mp3-256/",
+        "hq": "http://sabc-test.stream.vip/1/mp3-256/"
+    },
+    "name": "streamABC LIVE",
+}, "lq");
+``` 
+
+> Note: Stream URLs are set with a dedicated quality. This is basically a string that you can use to differentiate between qualities. You have to provide the
+used quality as the second argument to `setChannel`.
+
+Attach all event listeners you want to use. The most used events are `metadata`, `metanext`, `skippable`, `skip`, `play`. A full list of all events can be found below.
+
+```javascript
+sabcRadio.on("metadata", function(data) {
+    // do something with data
+})
+
+sabcRadio.on("skippable", function(skippable) {
+    // skippable is a boolean indicating that you can skip
+})
+```
+
+If you attached all event listeners you can finally init the channel and start playing:
+```javascript
+sabcRadio.init().then(function () {
+    // here you can add code that should be executed if the init process is finished
+});
+```
+
+The Radioplayer now plays your channel with the stream url from your channel config.
+
+To initiate a skip you can call the `.skip()` method. To return to the live channel use `.live()`. You can add these calls to click events:
+```javascript
+
+$("#SkipButton").on("click",function(e){
+    e.preventDefault();
+    sabcRadio.skip();
+});
+
+```
+
+### Events
+
+name          | arguments       | description
+:-------------|:----------------|:-----------
+`metadata`    | JSON object with meta data         | fires if new meta data for current song is available
+`metanext`    | JSON object with meta data         | fires if new meta data for next song is available 
+`skippable`   | boolean, true if skippable         | fires skippable state changes
+`streamtype`   | boolean, true = user stream, false = live stream         | stream state changes
+`loading`   | -         | stream is loading
+`ready`     | -         | stream is loading
+`play`   | { skipped: boolean, channel: channeldata}         | stream starts playing
+`stop`   | channeldata         | stream stops playing
+`playing`   | duration         | duration played in seconds
+`skip`   | channeldata         | fires after a skip
