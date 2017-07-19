@@ -16,7 +16,11 @@ streamABC player SDKs are implemented as JavaScript libraries and use the `sABC`
 This library provides methods to receive realtime metadata for:
 * the **listener** that is connected to our infrastructure
 * a specific radio station **channel**
-* a specific radio **station** with all dedicated channels
+* a specific radio **station** with all belonging channels
+
+The SDK tries to use websockets to provide the best experience with realtime events. If no websocket connection can be established it falls back to polling. Due to limitations of this mode events are not real-time and not all features are available.
+
+> Note: Listener specific meta data is only available if the channel streamed on streamABC infrastructure. All other types can be used with all backed distributors.
 
 ### Installation
 
@@ -50,8 +54,11 @@ After you created your instance you can attach event listeners to receive metada
 ### Attach Event Listeners
 
 `sABC.Playerservices` emits the following event types:
-* `metadata` - event fires if new data for the now playing song arrives 
-* `metanext` - event fires if new data for the upcoming song arrives 
+name          | arguments       | description
+:-------------|:----------------|:-----------
+`metadata`    | JSON object with meta data         | fires if new meta data for current song is available
+`metanext`    | JSON object with meta data         | fires if new meta data for next song is available 
+`error`  | error | fires if an error ocurred, the response object property type defines if the error is on the websocket side (ws) or audio side (audio)
 
 You can listen to one or both events:
 ```javascript
@@ -97,6 +104,46 @@ The payload `data` of both events contains all available metadata, for example:
     ]
 }
 ```
+
+### Start receiving user specific meta data
+
+To receive listener specific meta data the first step is to decorate the streaming url with our listener parameter. There is a convinience utility method `decorateStreamURL(url: string): string` that does exactly this:
+```javascript
+var streamURL = sabcService.decorateStreamURL("http://sabc-test.stream.vip/1/mp3-256/");
+``` 
+
+You can then start receiving meta data events:
+```javascript
+var streamURL = sabcService.startMeta();
+``` 
+
+> Note: The stream has to be played using the decorated stream URL to receive meta data events.
+
+### Start receiving channel or station events
+
+Because meta data is not user specific in this mode, you don't need to decorate your stream URL.
+
+You can start receiving events with one of this methods:
+* `startMetaStation(station: string): void` - receive meta data for all channels of a station
+* `startMetaChannel(channel: string): void` - receive meta data for one channel
+
+> Please use the channel key or station key provided by streamABC. You can find this information in your streamABC management console.
+
+```javascript
+sabcService.startMetaChannel("sABC-live");
+```
+
+### Stop receiving events and error handling
+
+To stop receive meta data events you can use `stopMeta()` method.
+It doesn't matter what mode you use.
+
+The SDK tries to handle connection errors as good as possible and reconnects if a websocket connection is lost.
+
+Error events are emitted if the SDK detects a connection error. A detailed error message is provided as an argument to this event.
+
+> Be aware, that error events are emitted even though the SDK tries to get around it by itself, e.g. falling back to polling if websockets don't work.
+
 
 ## `sABC.Radio`
 
@@ -191,3 +238,4 @@ name          | arguments       | description
 `stop`   | channeldata         | stream stops playing
 `playing`   | duration         | duration played in seconds
 `skip`   | channeldata         | fires after a skip
+`error`  | { type: ws\|audio, err: error} | fires if an error ocurred, the response object property type defines if the error is on the websocket side (ws) or audio side (audio)
