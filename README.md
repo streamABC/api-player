@@ -11,5 +11,5 @@ streamABC player SDKs are implemented as JavaScript libraries and use the `sABC`
 
 **Compatibility:** All streamABC libraries need a ES5 compatible webbrowser. All recent versions of major browsers are supported. Because we make strong use of Websockets some services will only work in a compatibility mode if no Websockets connection can be established.
 
-[Documentation for sABC.Playerservices](./Docs-Playerservices.md)
+[Documentation for sABC.Playerservices](./Docs-Playerservices.md) 
 [Documentation for sABC.Radio](./Docs-Radio.md)
