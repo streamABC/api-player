@@ -41,11 +41,12 @@ After you created your instance you can attach event listeners to receive metada
 ### Attach Event Listeners
 
 `sABC.Playerservices` emits the following event types:
-name          | arguments       | description
-:-------------|:----------------|:-----------
+
+name          | arguments                          | description
+:-------------|:-----------------------------------|:-----------
 `metadata`    | JSON object with meta data         | fires if new meta data for current song is available
 `metanext`    | JSON object with meta data         | fires if new meta data for next song is available 
-`error`  | error | fires if an error ocurred, the response object property type defines if the error is on the websocket side (ws) or audio side (audio)
+`error`       | error                              | fires if an error ocurred, the response object property type defines if the error is on the websocket side (ws) or audio side (audio)
 
 You can listen to one or both events:
 ```javascript
