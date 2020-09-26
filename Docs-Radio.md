@@ -1,6 +1,6 @@
 ## `sABC.Radio`
 
-This library provides methods to either control a Radioplayer console or a stand-alone player with a skipable radio stream in our streamABC infrastructure.
+This library provides methods to either control a Radioplayer console or a stand-alone player with a skipable radio stream in our streamABC/QuantumCast infrastructure.
 
 A reference implementation for Radioplayer console can be found in this [repository](https://github.com/streamABC/skiponradio-radioplayer).
 
@@ -17,7 +17,7 @@ Add a reference to our library to your web application like so:
 
 ### Usage
 
-Disable the default Radioplayer init call:
+If used in a Radioplayer console, disable the default Radioplayer init call (omit this if used in stand-alone mode):
 ```javascript
 //radioplayer.init();
 ```
@@ -30,6 +30,8 @@ var sabcRadio = sABC.newRadio({
     radioplayer: true
 });
 ```            
+
+Set `radioplayer: false` if used in stand-alone mode. All other functions keep the same in both modes.
 
 Set a channel with `sabcRadio.setChannel(channel: sABC.Channel, defaultQuality: string)`:
 ```javascript
